@@ -1,0 +1,109 @@
+//author @huntbao
+.mod-reqbuilder-body {
+  .type-tabs {
+    margin: 20px
+    display: flex
+
+    > li {
+      margin: 0 60px 0 0
+      display: flex
+
+      &.disabled {
+        cursor: default
+        color: #ccc
+
+        label {
+          cursor: default
+        }
+      }
+
+      &.checked {
+        color: #333
+      }
+    }
+
+    label {
+      display: flex
+      cursor: pointer
+
+      input {
+        cursor: pointer
+
+        &:disabled {
+          cursor: default
+        }
+      }
+
+      span {
+        margin: -4px 0 0 8px
+      }
+    }
+  }
+
+  .select-lists {
+    display: flex
+
+    .select-wrap {
+      position: relative
+      margin: -4px 0 0 8px;
+
+      .select-dis-value {
+        cursor: default;
+        margin: 0 0 0 8px
+        font-size: 12px
+        color: #ccc
+      }
+
+      .mod-dropdown-menu {
+        position: absolute
+        top: 22px;
+        right: 0;
+        display: none
+      }
+
+      &.show-list {
+        .mod-dropdown-menu {
+          display: block
+        }
+      }
+
+      &.show-value {
+        .select-dis-value {
+          color #06c;
+          cursor: pointer
+        }
+      }
+    }
+  }
+
+  .binary-file {
+    margin: 0 0 0 20px
+  }
+
+  .mod-kv {
+    .kv-row {
+
+      input {
+        margin-right: 1%
+        width: 50%
+      }
+
+      &-wrap {
+        flex: 1
+      }
+    }
+  }
+
+  .tip-con {
+    padding: 2px 0 0 20px;
+    color: #999;
+
+    em {
+      margin: 0 4px 0 0
+    }
+
+    &.error-tip {
+      color: #ff5a19;
+    }
+  }
+}

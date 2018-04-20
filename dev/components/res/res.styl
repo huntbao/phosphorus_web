@@ -1,0 +1,115 @@
+//author @huntbao
+.mod-res {
+  margin: 15px 8px
+
+  .res-tip {
+    color: #999;
+    display flex
+
+    .glyphicon {
+      margin: 3px 4px 0 0
+    }
+
+    .spinner {
+      margin: -8px 8px 0 0
+    }
+  }
+
+  .failed-tip {
+    color: #ff5a19;
+  }
+
+  .success-tip {
+    font-size: 12px
+    display: flex
+
+    .status,
+    .time {
+      margin: 0 20px 0 0
+      font-weight: bold
+
+      &-label {
+        margin: 0 4px 0 0
+      }
+
+      &-code,
+      &-text {
+        color: #298852
+        margin: 0 0 0 2px
+      }
+
+    }
+
+    .res-types {
+      display: flex
+      background-color: #f2f2f2;
+      border-radius: 3px;
+      border: solid 1px #ccc;
+      height: 28px;
+      margin: -5px 0 0 30px;
+      overflow: hidden
+      cursor: pointer
+
+      li {
+        padding: 5px 8px;
+        text-align: center
+        font-weight: bold
+        transition all ease .3s;
+
+        &:hover {
+          color: #298852;
+        }
+      }
+
+      .active {
+        color: #298852;
+      }
+
+    }
+
+    .res-prettytype-list {
+      position: relative
+      margin: 0 0 0 20px
+      cursor: pointer
+      display: none
+
+      .mod-dropdown-menu {
+        position: absolute
+        top: 20px
+        left: 0;
+        display: none
+      }
+
+      &.show-type-list {
+        .mod-dropdown-menu {
+          display: block
+        }
+      }
+    }
+
+    &.pretty-list {
+      .res-prettytype-list {
+        display: block
+      }
+    }
+  }
+
+  .raw-con,
+  .preview-con {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 54px;
+    bottom: 20px;
+    border: 1px solid #ccc;
+
+    textarea,
+    iframe {
+      width: 100%
+      height: 100%
+      resize none
+      border: none
+      outline: none
+    }
+  }
+}

@@ -1,0 +1,29 @@
+//author @huntbao
+.mod-tab {
+  ol {
+    border-bottom: 1px solid #ccc
+    margin: 16px -10px 0
+    color: #999
+
+    li {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      float: left;
+      cursor: pointer;
+      padding-bottom: 8px;
+      text-indent: 10px;
+      transition: color ease 0.5s;
+
+      &:hover {
+        color: #333;
+      }
+
+      &.active {
+        color: #1acaaf;
+        border-bottom: solid 4px #1acaaf;
+        cursor: default
+      }
+    }
+  }
+}

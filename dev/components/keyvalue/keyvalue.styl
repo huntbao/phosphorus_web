@@ -1,0 +1,162 @@
+//author @huntbao
+.mod-kv {
+  font-size: 12px
+
+  .kv-row {
+    display: flex
+    position relative
+
+    .input-wrap {
+      flex: 1;
+      transition all ease .2s
+      display: flex
+      height 31px
+      overflow: hidden;
+
+      &.active {
+        background-color: #e8f2fe;
+
+        & + {
+          .title-tip {
+            opacity 1
+          }
+        }
+      }
+
+      &:hover + {
+        .title-tip {
+          opacity 1
+        }
+      }
+    }
+
+    input {
+      width: 50%
+      margin: 0 1% 0 0
+      border: none
+      outline: none
+      text-indent: 4px
+      background-color: transparent
+      height: 30px
+      line-height: 30px
+      border-bottom: 1px solid #eee
+      transition all ease .5s;
+
+      &:focus {
+        border-bottom-color: #ccc
+      }
+
+      &:read-only {
+        cursor: not-allowed;
+        color: rgba(127, 127, 127, 1)
+      }
+
+      &:last-child {
+        margin: 0
+      }
+    }
+
+    .glyphicon {
+      font-size: 20px
+      cursor: pointer
+      margin: 5px 4px 0;
+      color: #eee
+      transition color ease .2s
+
+      &:hover {
+        color: #ccc
+      }
+
+      &.checked {
+        color: #53a2f2
+      }
+    }
+
+    .glyphicon-remove {
+      visibility hidden
+    }
+
+    &.removable > .kv-row-wrap {
+      .glyphicon-remove {
+        visibility visible
+      }
+    }
+
+    &.removable > .glyphicon-remove {
+      visibility visible
+    }
+
+    &.onlyone > .kv-row-wrap {
+      .glyphicon-remove {
+        visibility hidden
+      }
+    }
+
+    &.onlyone > .glyphicon-remove {
+      visibility hidden
+    }
+
+    // keyvalue x
+    select {
+      border: none;
+      border-bottom: 1px solid #eee;
+      height: 31px;
+      outline: none;
+      background-color: transparent
+    }
+
+    input[type=file] {
+      display: none
+      height: 25px;
+      line-height: 0;
+      margin-top: 5px;
+    }
+
+    .file-value-type {
+      input[type=file] {
+        display: block
+      }
+
+      .value-text-inp {
+        display: none
+      }
+
+    }
+
+  }
+
+  .title-tip {
+    position: absolute
+    left: -8px;
+    top: 16px;
+    opacity 0
+    transition all ease .1s
+
+    &:after {
+      background: rgba(0, 0, 0, 1);
+      border-radius: 4px;
+      bottom: 1.35em;
+      color: #fff;
+      content: attr(title);
+      display: block;
+      padding: 2px 6px 4px;
+      position: absolute;
+      white-space: nowrap;
+      z-index: 98;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    &:before {
+      border: solid;
+      border-color: rgba(0, 0, 0, 1) transparent;
+      border-width: .4em .4em 0 .4em;
+      bottom: 1em;
+      content: "";
+      display: block;
+      left: 18px;
+      position: absolute;
+      z-index: 99;
+    }
+  }
+}

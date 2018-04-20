@@ -1,0 +1,79 @@
+//author @huntbao
+.mod-reqbuilder-tab {
+  position: relative
+
+  ol {
+    border-bottom: 1px solid #ccc
+    margin: 16px 0 0
+    color: #999
+
+    li {
+      width: 160px
+      text-align: center
+      float: left
+      cursor: pointer
+      padding-bottom: 8px;
+      transition color ease .5s
+      color: #999;
+      border-right 1px solid #ccc
+      border-bottom: solid 4px #fff;
+
+      &:hover {
+        color: #666;
+      }
+
+      &.active {
+        color: #666;
+        border-bottom-color #666
+        cursor: default
+      }
+
+      &.disabled {
+        cursor: not-allowed
+        color: #eee
+      }
+    }
+  }
+
+  .res-check-tip {
+    position: absolute
+    left: 491px;
+    top: 16px;
+
+    &:after {
+      background: rgba(0, 170, 0, .8);
+      border-radius: 4px;
+      bottom: 1.35em;
+      color: #fff;
+      content: 'Check succeed';
+      display: block;
+      left: 1em;
+      padding: 2px 8px;
+      position: absolute;
+      white-space: nowrap;
+      z-index: 98;
+    }
+
+    &:before {
+      border: solid;
+      border-color: rgba(0, 170, 0, .8) transparent;
+      border-width: .4em .4em 0 .4em;
+      bottom: 1em;
+      content: "";
+      display: block;
+      left: 67px;
+      position: absolute;
+      z-index: 99;
+    }
+
+    &.failed {
+      &:after {
+        background-color: rgba(255, 175, 61, .8);
+        content: 'Check failed'
+      }
+      &:before {
+        border-color: rgba(255, 175, 61, .8) transparent;
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+//author @huntbao
+.mod-brace-editor {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 226px;
+  bottom: 20px;
+  border: 1px solid #ccc
+
+  > div {
+    height: 100%
+  }
+
+  .toggle-wrapping,
+  .copy-icon,
+  .json-format,
+  .search-in-editor {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 28px;
+    background-color: #f2f2f2;
+    cursor: pointer
+    position: absolute;
+    right: 120px;
+    top: -39px;
+
+    &.active {
+      background-color: #fff;
+    }
+  }
+
+  .copy-icon {
+    right: 40px;
+  }
+
+  .search-in-editor {
+    right: 0;
+  }
+
+  .json-format {
+    right: 80px;
+  }
+}

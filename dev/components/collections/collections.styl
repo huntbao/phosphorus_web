@@ -1,0 +1,424 @@
+//author @huntbao
+.mod-collection-actions {
+  padding: 6px 12px 4px;
+  margin: 0 -10px;
+  color: #ccc
+  text-align: right
+  border-bottom 1px solid #ccc
+  font-size: 20px
+  position relative
+
+  .icon-wrap {
+    cursor: pointer
+    margin: 0 0 0 12px
+    transition all ease .3s
+
+    &:hover {
+      color: #666
+    }
+  }
+
+  .glyphicon-trash {
+    position: absolute
+    left: 10px;
+    top: 10px;
+  }
+
+  .glyphicon-plus {
+    font-size: 12px
+    margin: 0 0 0 2px
+  }
+}
+
+.mod-collections {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute
+  top: 154px
+  right: 0
+  bottom: 60px
+  left: 0;
+  padding 0 10px
+
+  .empty-tip {
+    font-size: 12px
+    color: #999
+    margin: 8px 0 0
+    cursor: default
+  }
+
+  .coll {
+    margin: 0 -10px
+    position relative
+    border-bottom: 1px solid #f5f5f5;
+
+    &-nei {
+      .coll-icon {
+        border: 2px solid #1acaaf;
+        color: #1acaaf;
+      }
+
+      .coll-folder-icon {
+        color: #1acaaf;
+      }
+    }
+
+    &-wrap {
+      display: flex
+      color: #4c4c4c
+      padding: 8px
+      cursor: pointer
+      transition all ease .5s
+
+      &:hover {
+        background-color: #e8f2fe
+
+        .coll-actions {
+          opacity: 1
+        }
+      }
+
+      .mod-dropdown-menu {
+        position: absolute
+        right: 21px;
+        top: 48px;
+        opacity: 0
+        pointer-events none
+        transition opacity ease .2s
+      }
+
+      &.show-action-menu {
+        .mod-dropdown-menu {
+          opacity: 1
+          pointer-events auto
+        }
+      }
+    }
+
+    &-icon {
+      width: 44px
+      height: 44px
+      line-height: 48px
+      border: 2px solid #b5d5ff
+      border-radius 50%
+      color: #53a2f2
+      font-size: 26px;
+      text-align: center;
+    }
+
+    &-info {
+      margin: 4px 0 0 12px
+      flex: 1
+    }
+
+    &-actions,
+    &-folder-actions,
+    &-req-actions {
+
+      opacity 0
+      transition all ease .3s;
+
+      &-menus {
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 16px;
+        border-radius 50%;
+        text-align: center
+        cursor: pointer
+        background-color #fff
+        transition all ease .3s;
+        border: 2px solid #ccc
+
+        &:hover {
+          border-color: #aaa
+        }
+      }
+
+      &-menus {
+        .glyphicon-option-horizontal {
+          margin: 7px 0 0 -1px
+        }
+      }
+    }
+
+    &-actions {
+      margin: 8px 0 0
+    }
+
+    &-folder-actions {
+      margin: 0 -6px 0 0;
+    }
+
+    &-name {
+      font-weight: bold
+    }
+
+    &-reqnum {
+      font-size: 12px
+      color: #ccc
+      display: flex
+    }
+
+    &-dot {
+      width: 8px
+      height: 8px
+      background-color: #ccc
+      border-radius 50%
+      margin: 6px 3px 0 0
+    }
+
+    &-date {
+      font-size: 12px
+      margin: 0 0 0 6px
+    }
+
+    &-folder {
+
+      &-wrap {
+        display: flex
+        font-size: 12px
+        padding: 4px 14px;
+        cursor: pointer
+        transition all ease .5s
+
+        &:hover {
+          background-color: #e8f2fe
+
+          .coll-folder-actions {
+            opacity: 1
+          }
+        }
+
+        .glyphicon-folder-open {
+          display none
+          margin: 2px 0 0
+        }
+
+        &.expand {
+
+          .glyphicon-folder-close {
+            display none
+          }
+
+          .glyphicon-folder-open {
+            display block
+          }
+        }
+
+        .mod-dropdown-menu {
+          position: absolute
+          right: 21px;
+          opacity: 0
+          transition opacity ease .2s
+          pointer-events none
+        }
+
+        &.show-action-menu {
+          .mod-dropdown-menu {
+            opacity: 1
+            pointer-events auto
+          }
+        }
+      }
+
+      &-icon {
+        width: 32px
+        height: 32px
+        line-height: 34px
+        font-size: 26px
+        text-align: center
+        color: #53a2f2
+      }
+
+      &-name {
+        margin: 7px 0 0 20px
+        flex: 1;
+      }
+
+      .no-request-tip {
+        margin: 4px 18px 0
+        color: #999
+        font-size: 12px
+      }
+    }
+
+    &-req {
+      color: #4c4c4c
+      font-size: 12px
+      display: flex
+      padding: 0 0 0 20px
+      height: 30px
+      line-height: 30px
+      cursor: pointer
+      transition all ease .5s
+
+      &:hover {
+        background-color: #e8f2fe
+
+        .coll-req-actions {
+          opacity: 1
+        }
+      }
+
+      &.active {
+        background-color: #1acaaf;
+        color: #fff
+        font-weight: bold;
+        cursor: default
+
+        .coll-req-method {
+          color: #fff
+        }
+
+        .coll-req-actions {
+          color: #fff
+          opacity 1
+
+          .coll-req-actions-menus {
+            border-color: #fff;
+            color: #333;
+          }
+        }
+      }
+
+      &.dragging {
+        opacity 0.5
+        background-color: #000
+        color: #fff
+      }
+
+      &-method {
+        margin: 0 8px 0 0
+        color: #666
+        font-weight: bold
+        width: 44px
+        text-align: center
+      }
+
+      &-url {
+        width: 200px
+        white-space: nowrap
+        text-overflow ellipsis
+        overflow: hidden
+      }
+
+      .mod-dropdown-menu {
+        position: absolute
+        right: 21px;
+        opacity: 0
+        transition opacity ease .2s
+        pointer-events none
+        font-weight: normal
+      }
+
+      &.show-action-menu {
+        .mod-dropdown-menu {
+          opacity: 1
+          pointer-events auto
+        }
+      }
+      .coll-req-actions {
+        .coll-req-actions-menus {
+          width: 20px;
+          height: 20px;
+          line-height: 20px
+          font-size: 12px;
+          margin: 4px 0 0;
+
+          .glyphicon-option-horizontal {
+            margin-top: 4px
+          }
+        }
+      }
+
+      .coll-req-url {
+        width: 214px
+      }
+
+      &-status {
+        margin: 0 0 0 -14px
+        font-size: 14px;
+        cursor: default
+      }
+
+      &-wait {
+        cursor: pointer
+
+        &:hover {
+          color: #ff615f
+        }
+      }
+
+      &-failed {
+        color #ff615f
+      }
+
+      &-succeed {
+        color #080
+      }
+
+      &-ani {
+        animation: sk-rotate 2.0s infinite linear;
+      }
+
+    }
+
+    .method-get {
+      color: #81d4a5
+    }
+
+    .method-post {
+      color: #ffaf3d
+    }
+
+    .method-delete {
+      color: #ff615f
+    }
+
+    .method-put {
+      color: #83b2e5
+    }
+
+    &-folders,
+    &-reqs {
+      transition all ease .2s;
+      height: 0
+      overflow: hidden;
+    }
+
+    &-reqs.expand {
+      box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.37)
+    }
+
+    &-folders {
+      box-shadow: inset 0 2rem 1rem -2rem rgba(0, 0, 0, 0.37);
+      &.expand {
+        border-bottom 1px solid #aaa
+      }
+    }
+  }
+}
+
+.mod-copyright {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 10px;
+
+  .xhr-plugin-install-tip {
+    font-size: 12px
+    color: #e0c05e
+    background-color: #fdf7e5
+    margin: 8px 0 0
+    padding: 8px
+  }
+
+  .copyright {
+    position: absolute
+    bottom: 10px
+    font-size: 12px
+    color: #999
+  }
+}

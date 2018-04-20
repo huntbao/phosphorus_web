@@ -1,0 +1,296 @@
+//author @huntbao
+html {
+  color: #333;
+  background: #fff;
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, form, th, td {
+  margin: 0;
+  padding: 0;
+}
+
+body, button, input, select, textarea {
+  font: 14px / 1.5 "Microsoft Yahei", STHeiti, Verdana, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+address, cite, dfn, em, var {
+  font-style: normal;
+}
+
+code, kbd, pre, samp, tt {
+  font-family: "Courier New", Courier, monospace;
+}
+
+small {
+  font-size: 12px;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #408cdf;
+  outline: 0 none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+abbr[title], acronym[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+q:before, q:after {
+  content: '';
+}
+
+legend {
+  color: #000;
+}
+
+fieldset, img {
+  border: none;
+}
+
+button, input, select, textarea {
+  font-size: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.f-r {
+  float: right;
+}
+
+.f-clr, .clr {
+  zoom: 1;
+}
+
+.f-clr:after, .clr:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  -webkit-border-radius: 1ex;
+  -webkit-box-shadow: 0 1px 2px rgba(238, 238, 238, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+  background: #eee;
+}
+
+input.inp-error,
+input.inp-error::-webkit-input-placeholder {
+  color: #ff5a19;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  text-align: center;
+  animation: sk-rotate 2.0s infinite linear;
+
+  .dot1,
+  .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #999;
+    border-radius: 100%;
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+
+  .dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+
+  @keyframes sk-rotate {
+    100% {
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg)
+    }
+  } @keyframes sk-bounce {
+      0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      }
+      50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+}
+
+.main,
+.main-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  h1 {
+    font-size: 0;
+    margin: 6px 12px 0 0;
+    text-transform: uppercase;
+    font-family: cursive;
+    font-weight: bold
+    color: #ccc
+    -webkit-user-select none
+    cursor: default
+    height: 48px
+    overflow: hidden
+    background-image: url('../../libs/logo.png');
+    width: 280px
+    background-size 100%
+  }
+
+  .show-side {
+    .side {
+      left: 0;
+
+      .glyphicon-chevron-left {
+        display: block
+      }
+
+      .glyphicon-chevron-right {
+        display: none
+      }
+    }
+
+    .bd {
+      left 320px
+    }
+  }
+}
+
+.side {
+  width: 300px;
+  position: absolute;
+  top: 0
+  left: -320px;
+  bottom: 0;
+  padding: 6px 10px 10px
+  z-index: 1
+  transition all ease .1s
+
+  .toggle-show {
+    position: absolute
+    bottom: 4px
+    right: -19px
+    text-align: center
+    height: 30px
+    line-height: 30px
+    background-color: #ccc
+    cursor: pointer
+    border-radius: 0 3px 3px 0
+    color: #fff
+    font-size: 12px;
+    width: 18px;
+    transition all ease .1s
+
+    &:hover {
+      background-color: #999
+    }
+
+    .glyphicon-chevron-left {
+      display: none
+      margin: 7px 0 0;
+    }
+
+    .glyphicon-chevron-right {
+      display: block
+      margin: 7px 0 0;
+    }
+  }
+}
+
+.bd {
+  border-left: 1px solid #f2f2f2;
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 0
+  top: 0;
+  transition all ease .1s
+}
+
+.copy-textarea {
+  position absolute
+  left: -9999px
+}
+
+.loading-tip {
+  position: absolute
+  top: -100px
+  left: 50%
+  min-width 100px
+  max-width 500px
+  transform: translate(-50%, 0)
+  text-overflow ellipsis
+  overflow hidden
+  white-space nowrap
+  background-color #1acaaf
+  z-index: 999
+  padding: 8px 20px
+  text-align: center
+  box-shadow: 0 1px 4px 0 rgba(26, 102, 175, 0.37);
+  border-radius 0 0 3px 3px
+  cursor: default
+  transition all ease .5s;
+  color: #fff
+}
+
+.main-wrap {
+  &.show-loading {
+    .loading-tip {
+      top: 0
+    }
+  }
+}

@@ -1,0 +1,65 @@
+//author @huntbao
+.mod-res-checker {
+  margin: 12px
+
+  .res-checker-tip {
+    color: #999
+
+    .glyphicon-exclamation-sign {
+      margin: 0 4px 0 0
+    }
+  }
+
+  .tip-con {
+    color: #999
+    margin: 20px 0 0 16px
+
+    .glyphicon-exclamation-sign {
+      margin: 0 4px 0 0
+    }
+  }
+
+  .error-tip {
+    color: #ffaf3d
+    margin: 20px
+  }
+
+  .select-wrap {
+    position: relative
+    margin: 6px 0 0 16px;
+    display: inline-block
+
+    .select-dis-value {
+      cursor: pointer;
+      margin: 0 0 0 8px
+      color: #06c
+    }
+
+    .mod-dropdown-menu {
+      position: absolute
+      top: 22px;
+      right: 0;
+      display: none
+    }
+
+    &.show-list {
+      .mod-dropdown-menu {
+        display: block
+      }
+    }
+
+    &.disabled {
+      .select-dis-value {
+        color: #ccc
+        cursor: default
+      }
+    }
+  }
+
+  &.nei-res-checker {
+    .select-dis-value {
+      color: #ccc
+      cursor: default
+    }
+  }
+}
