@@ -5,6 +5,10 @@ import React from 'react'
 import Ace from 'brace'
 import classNames from 'classnames'
 import Util from '../../libs/util'
+import 'brace/mode/html'
+import 'brace/mode/json'
+import 'brace/mode/xml'
+import 'brace/mode/text'
 
 class AceEditor extends React.Component {
 
