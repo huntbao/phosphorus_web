@@ -14,7 +14,7 @@ class KeyValueX extends KeyValue {
     })
     return (
       <div className={classes} onFocus={(e) => {
-        this.focus(rowIndex, e)
+        this.focus(kv, rowIndex, e)
       }} onBlur={(e) => {
         this.blur(e)
       }}>

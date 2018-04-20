@@ -1014,10 +1014,18 @@ let bodyRawJSONActions = {
 
   addBodyRawJSONKV(rowIndex, kv) {
     let row = this.getBodyRawJSONRow(rowIndex)
+    let item = Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
+      values: []
+    })
+    // 最后一个空行得到焦点
+    if (row.parent.length === 0) {
+      let kvs = tabCons.items[tabIndex].builders.bodyRawJSONKVs
+      if (+rowIndex === kvs.length - 1) {
+        kvs.push(item)
+      }
+      return
+    }
     if (+row.targetIndex === row.parent.length - 1) {
-      let item = Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
-        values: []
-      })
       if (row.parentValueType === 'array') {
         item.valueType = row.parentChildValueType
         item.parentValueType = row.parentValueType
