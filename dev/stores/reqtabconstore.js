@@ -68,7 +68,7 @@ const DEFAULT_BODY_FORMDATA_KV = Object.assign({}, DEFAULT_KV, {
 const DEFAULT_BODY_RAW_JSON_KV = Object.assign({}, DEFAULT_KV, {
   valueType: 'string',
   childValueType: 'string',
-  values: [],
+  valuex: [],
   typeChangeable: true,
   valueReadonly: false,
   childTypeChangeable: true
@@ -77,7 +77,7 @@ const DEFAULT_BODY_XFORM_KV = Object.assign({}, DEFAULT_KV)
 const DEFAULT_RES_CHECKER_KV = Object.assign({}, DEFAULT_KV, {
   valueType: 'string',
   childValueType: 'string',
-  values: [],
+  valuex: [],
   typeChangeable: true,
   childTypeChangeable: true
 })
@@ -425,11 +425,11 @@ let tabConActions = {
         if (builders.resCheckerKVs) {
           // refine res checker kvs
           let refineResCheckerData = (data) => {
-            return data.values.map((item) => {
+            return data.valuex.map((item) => {
               return Object.assign({}, DEFAULT_RES_CHECKER_KV, {
                 key: item.key,
                 checked: item.checked,
-                values: refineResCheckerData(item),
+                valuex: refineResCheckerData(item),
                 valueType: item.value_type,
                 childValueType: item.child_value_type,
                 typeChangeable: item.type_changeable,
@@ -438,7 +438,7 @@ let tabConActions = {
             })
           }
           builders.resCheckerKVs.forEach((item) => {
-            item.values = refineResCheckerData(item)
+            item.valuex = refineResCheckerData(item)
           })
           if (builders.resJSONType !== 'object') {
             Object.assign(builders.resCheckerKVs[0], {
@@ -453,12 +453,12 @@ let tabConActions = {
         if (builders.bodyRawJSONKVs) {
           // refine body raw json kvs
           let refineBodyRawJSONData = (data) => {
-            return data.values.map((item) => {
+            return data.valuex.map((item) => {
               return Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
                 key: item.key,
                 value: item.value,
                 checked: item.checked,
-                values: refineBodyRawJSONData(item),
+                valuex: refineBodyRawJSONData(item),
                 valueType: item.value_type,
                 valueReadonly: item.value_readonly,
                 childValueType: item.child_value_type,
@@ -468,7 +468,7 @@ let tabConActions = {
             })
           }
           builders.bodyRawJSONKVs.forEach((item) => {
-            item.values = refineBodyRawJSONData(item)
+            item.valuex = refineBodyRawJSONData(item)
           })
           if (builders.bodyType.jsonType !== 'object') {
             builders.bodyRawJSONKVs[0].duplicatable = false
@@ -934,7 +934,7 @@ let bodyRawJSONActions = {
     }
     builders.bodyType.jsonType = jsonType
     let newKV = Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
-      values: []
+      valuex: []
     })
     switch (jsonType) {
       case 'object':
@@ -953,11 +953,11 @@ let bodyRawJSONActions = {
           valueType: jsonType
         })
         let childItem = Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
-          values: [],
+          valuex: [],
           keyVisible: false,
           typeChangeable: false
         })
-        newKV.values.push(childItem)
+        newKV.valuex.push(childItem)
         builders.bodyRawJSONKVs = [newKV]
         break
 
@@ -986,13 +986,13 @@ let bodyRawJSONActions = {
     let targetRow = bodyRawJSONKVs
     for (let i = 0; i < indexes.length; i++) {
       parentRow = targetRow
-      // chrome 更新后, 数组也有 values 方法, 导致异常
-      targetRow = (targetRow.hasOwnProperty('values') ? targetRow.values : targetRow)[indexes[i]]
+      // chrome 更新后, 数组也有 valuex 方法, 导致异常
+      targetRow = (targetRow.hasOwnProperty('valuex') ? targetRow.valuex : targetRow)[indexes[i]]
     }
     return {
       targetIndex: indexes[indexes.length - 1],
       target: targetRow,
-      parent: parentRow.values || parentRow,
+      parent: parentRow.valuex || parentRow,
       parentValueType: parentRow.valueType,
       parentChildValueType: parentRow.childValueType
     }
@@ -1004,7 +1004,7 @@ let bodyRawJSONActions = {
     let checked = !row.target.checked
     row.target.checked = checked
     let dealChild = (target) => {
-      _.each(target.values, (kv) => {
+      _.each(target.valuex, (kv) => {
         kv.checked = checked
         dealChild(kv)
       })
@@ -1015,7 +1015,7 @@ let bodyRawJSONActions = {
   addBodyRawJSONKV(rowIndex, kv) {
     let row = this.getBodyRawJSONRow(rowIndex)
     let item = Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
-      values: []
+      valuex: []
     })
     // 最后一个空行得到焦点
     if (row.parent.length === 0) {
@@ -1037,15 +1037,15 @@ let bodyRawJSONActions = {
           if (kv) {
             // in NEI, the new added object item should be same as the first element
             item.value = kv.value
-            item.values = _.cloneDeep(kv.values)
-            item.values.forEach((kv) => {
+            item.valuex = _.cloneDeep(kv.valuex)
+            item.valuex.forEach((kv) => {
               if (!/^(object|array)$/.test(kv.valueType)) {
                 kv.value = ''
               }
             })
           } else {
-            item.values.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
-              values: []
+            item.valuex.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
+              valuex: []
             }))
           }
         }
@@ -1076,17 +1076,17 @@ let bodyRawJSONActions = {
 
   changeBodyRawJSONKVValueType(rowIndex, valueType) {
     let row = this.getBodyRawJSONRow(rowIndex)
-    row.target.values = []
+    row.target.valuex = []
     row.target.valueReadonly = false
     row.target.valueType = valueType
     row.target.childValueType = ''
     if (/^object$/.test(valueType)) {
-      row.target.values.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV))
+      row.target.valuex.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV))
       row.target.valueReadonly = true
     } else if (/^array$/.test(valueType)) {
       row.target.valueReadonly = true
       row.target.childValueType = 'string'
-      row.target.values.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
+      row.target.valuex.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
         keyVisible: false,
         typeChangeable: false
       }))
@@ -1095,20 +1095,20 @@ let bodyRawJSONActions = {
 
   changeBodyRawJSONKVChildValueType(rowIndex, valueType) {
     let row = this.getBodyRawJSONRow(rowIndex)
-    row.target.values = []
+    row.target.valuex = []
     row.target.childValueType = valueType
     let item = Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
-      values: [],
+      valuex: [],
       valueType: valueType,
       keyVisible: false,
       typeChangeable: false
     })
-    row.target.values.push(item)
+    row.target.valuex.push(item)
     if (/^object$/.test(valueType)) {
       item.value = ARRAY_ITEM_PLACEHOLDER
       item.valueReadonly = true
-      item.values.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
-        values: []
+      item.valuex.push(Object.assign({}, DEFAULT_BODY_RAW_JSON_KV, {
+        valuex: []
       }))
     }
   }
@@ -1123,13 +1123,13 @@ let resCheckerActions = {
     let targetRow = resCheckerKVs
     for (let i = 0; i < indexes.length; i++) {
       parentRow = targetRow
-      // chrome 更新后, 数组也有 values 方法, 导致异常
-      targetRow = (targetRow.hasOwnProperty('values') ? targetRow.values : targetRow)[indexes[i]]
+      // chrome 更新后, 数组也有 valuex 方法, 导致异常
+      targetRow = (targetRow.hasOwnProperty('valuex') ? targetRow.valuex : targetRow)[indexes[i]]
     }
     return {
       targetIndex: indexes[indexes.length - 1],
       target: targetRow,
-      parent: parentRow.values || parentRow
+      parent: parentRow.valuex || parentRow
     }
   },
 
@@ -1139,7 +1139,7 @@ let resCheckerActions = {
     let checked = !row.target.checked
     row.target.checked = checked
     let dealChild = (target) => {
-      _.each(target.values, (kv) => {
+      _.each(target.valuex, (kv) => {
         kv.checked = checked
         dealChild(kv)
       })
@@ -1171,11 +1171,11 @@ let resCheckerActions = {
 
   changeResCheckerKVValueType(rowIndex, valueType) {
     let row = this.getResCheckerRow(rowIndex)
-    row.target.values = []
+    row.target.valuex = []
     row.target.valueType = valueType
     row.target.childValueType = ''
     if (/^object$/.test(valueType)) {
-      row.target.values.push(Object.assign({}, DEFAULT_RES_CHECKER_KV))
+      row.target.valuex.push(Object.assign({}, DEFAULT_RES_CHECKER_KV))
     } else if (/^array$/.test(valueType)) {
       row.target.childValueType = 'string'
     }
@@ -1183,10 +1183,10 @@ let resCheckerActions = {
 
   changeResCheckerKVChildValueType(rowIndex, valueType) {
     let row = this.getResCheckerRow(rowIndex)
-    row.target.values = []
+    row.target.valuex = []
     row.target.childValueType = valueType
     if (/^object$/.test(valueType)) {
-      row.target.values.push(Object.assign({}, DEFAULT_RES_CHECKER_KV))
+      row.target.valuex.push(Object.assign({}, DEFAULT_RES_CHECKER_KV))
     }
   },
 
@@ -1202,7 +1202,7 @@ let resCheckerActions = {
     }
     builders.resJSONType = jsonType
     let newKV = Object.assign({}, DEFAULT_RES_CHECKER_KV, {
-      values: []
+      valuex: []
     })
     switch (jsonType) {
       case 'object':

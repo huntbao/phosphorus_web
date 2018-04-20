@@ -63,7 +63,7 @@ const REQUEST_DATA_MAP = {
     fields: {
       checked: 'checked',
       key: 'key',
-      values: 'values',
+      valuex: 'valuex',
       valueType: 'value_type',
       childValueType: 'child_value_type',
       typeChangeable: 'type_changeable',
@@ -78,7 +78,7 @@ const REQUEST_DATA_MAP = {
       checked: 'checked',
       key: 'key',
       value: 'value',
-      values: 'values',
+      valuex: 'valuex',
       valueType: 'value_type',
       childValueType: 'child_value_type',
       valueReadonly: 'value_readonly',

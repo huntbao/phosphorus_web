@@ -11,7 +11,7 @@ class KeyValueT extends KeyValue {
   render() {
     let getSubNodes = (kv) => {
       if (/^(object|array)$/.test(kv.valueType)) {
-        return getNodes(kv.values, kv, kv.valueType, kv.childValueType)
+        return getNodes(kv.valuex, kv, kv.valueType, kv.childValueType)
       }
     }
     let getNodes = (kvs, parentKV, parentValueType, parentChildValueType) => {

@@ -153,11 +153,11 @@ let actions = {
     } else {
       if (Array.isArray(savedData['res_checker_data'])) {
         let refineResCheckerData = (data) => {
-          return data.values.map((item) => {
+          return data.valuex.map((item) => {
             return {
               key: item.key,
               checked: item.checked,
-              values: refineResCheckerData(item),
+              valuex: refineResCheckerData(item),
               value_type: item.valueType,
               childValueType: item.childValueType,
               type_changeable: item.typeChangeable,
@@ -166,19 +166,19 @@ let actions = {
           })
         }
         savedData['res_checker_data'].forEach((item) => {
-          item.values = refineResCheckerData(item)
+          item.valuex = refineResCheckerData(item)
         })
       }
     }
     if (Array.isArray(savedData['body_raw_json'])) {
       // refine `body_raw_json`
       let refineBodyRawJSONData = (data) => {
-        return data.values.map((item) => {
+        return data.valuex.map((item) => {
           return {
             key: item.key,
             value: item.value,
             checked: item.checked,
-            values: refineBodyRawJSONData(item),
+            valuex: refineBodyRawJSONData(item),
             value_type: item.valueType,
             value_readonly: item.valueReadonly,
             child_value_type: item.childValueType,
@@ -188,7 +188,7 @@ let actions = {
         })
       }
       savedData['body_raw_json'].forEach((item) => {
-        item.values = refineBodyRawJSONData(item)
+        item.valuex = refineBodyRawJSONData(item)
       })
     }
     // save to local storage

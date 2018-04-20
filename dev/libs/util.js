@@ -366,7 +366,7 @@ let Util = {
             key: input.name,
             keyVisible: false,
             value: input.name,
-            values: [],
+            valuex: [],
             valueReadonly: true,
             valueType: 'array',
             childValueType: childValueType
@@ -375,22 +375,22 @@ let Util = {
             keyVisible: false,
             valueType: childValueType,
             parentValueType: 'array',
-            values: [],
+            valuex: [],
             readonly: false
           })
           let storedData = _.find(data, (d) => {
             return d.key === input.name
           })
-          if (storedData && storedData.values) {
-            storedData.values.forEach((kv) => {
+          if (storedData && storedData.valuex) {
+            storedData.valuex.forEach((kv) => {
               let item = _.clone(arrItem)
-              item.values = []
+              item.valuex = []
               item.value = kv.value
-              tempItem.values.push(item)
+              tempItem.valuex.push(item)
             })
           }
-          if (!tempItem.values.length) {
-            tempItem.values.push(arrItem)
+          if (!tempItem.valuex.length) {
+            tempItem.valuex.push(arrItem)
           }
           resultContainer.push(tempItem)
         } else {
@@ -401,7 +401,7 @@ let Util = {
             key: input.name,
             value: savedItem && savedItem.value || input.defaultValue,
             title: input.description,
-            values: [],
+            valuex: [],
             valueType: typeMap[input.type]
           })
           resultContainer.push(tempItem)
@@ -417,7 +417,7 @@ let Util = {
           let tempItem = Object.assign({}, itemTemplate, {
             key: input.name,
             title: input.description,
-            values: [],
+            valuex: [],
             valueType: valueType
           })
           resultContainer.push(tempItem)
@@ -437,13 +437,13 @@ let Util = {
         let storedData = _.find(data, (d) => {
           return d.key === input.name
         })
-        let storedValues = storedData && storedData.values || []
+        let storedValues = storedData && storedData.valuex || []
         if (dataType.format === 1) {
           //enums
           let tempItem = Object.assign({}, itemTemplate, {
             key: input.name,
             title: input.description,
-            values: [],
+            valuex: [],
             valueReadonly: true,
             value: getEnumValue(attributes)
           })
@@ -455,7 +455,7 @@ let Util = {
             keyVisible: false,
             value: input.name,
             title: input.description,
-            values: [],
+            valuex: [],
             valueType: 'array',
             valueReadonly: true,
             childValueType: childValueType
@@ -480,17 +480,17 @@ let Util = {
             childAttributes = _.uniq(childAttributes, 'id')
             storedValues.forEach((sv) => {
               let item = _.clone(childItem)
-              item.values = []
+              item.valuex = []
               childAttributes.forEach((attr) => {
-                getItem(attr, item.values, sv.values)
+                getItem(attr, item.valuex, sv.valuex)
               })
-              tempItem.values.push(item)
+              tempItem.valuex.push(item)
             })
-            if (!tempItem.values.length) {
+            if (!tempItem.valuex.length) {
               childAttributes.forEach((attr) => {
-                getItem(attr, childItem.values)
+                getItem(attr, childItem.valuex)
               })
-              tempItem.values.push(childItem)
+              tempItem.valuex.push(childItem)
             }
           } else {
             let childItem = Object.assign({}, itemTemplate, {
@@ -503,10 +503,10 @@ let Util = {
             storedValues.forEach((sv) => {
               let item = _.clone(childItem)
               item.value = sv.value
-              tempItem.values.push(item)
+              tempItem.valuex.push(item)
             })
-            if (!tempItem.values.length) {
-              tempItem.values.push(childItem)
+            if (!tempItem.valuex.length) {
+              tempItem.valuex.push(childItem)
             }
           }
           resultContainer.push(tempItem)
@@ -518,7 +518,7 @@ let Util = {
             value: input.name,
             title: input.description,
             valueReadonly: true,
-            values: [],
+            valuex: [],
             valueType: input.isArray ? 'array' : 'object',
             childValueType: childValueType
           })
@@ -528,7 +528,7 @@ let Util = {
             let childItem = Object.assign({}, itemTemplate, {
               value: `[[${dataType.name} item]]`,
               keyVisible: false,
-              values: [],
+              valuex: [],
               valueReadonly: true,
               valueType: childValueType,
               parentValueType: 'array',
@@ -537,22 +537,22 @@ let Util = {
             if (childValueType === 'object' && storedValues.length) {
               storedValues.forEach((kv) => {
                 let item = _.clone(childItem)
-                item.values = []
+                item.valuex = []
                 attributes.forEach((attr, index) => {
-                  getItem(attr, item.values, kv.values)
+                  getItem(attr, item.valuex, kv.valuex)
                 })
-                tempItem.values.push(item)
+                tempItem.valuex.push(item)
               })
             }
-            if (!tempItem.values.length) {
+            if (!tempItem.valuex.length) {
               attributes.forEach((attr) => {
-                getItem(attr, childItem.values)
+                getItem(attr, childItem.valuex)
               })
-              tempItem.values.push(childItem)
+              tempItem.valuex.push(childItem)
             }
           } else {
             attributes.forEach((attr) => {
-              getItem(attr, tempItem.values, storedValues)
+              getItem(attr, tempItem.valuex, storedValues)
             })
           }
           resultContainer.push(tempItem)
@@ -576,7 +576,7 @@ let Util = {
             value: '[[array]]',
             valueReadonly: true,
             title: inputs[0].description,
-            values: [],
+            valuex: [],
             valueType: 'array',
             childValueType: paramsInfo.childValueType,
             keyVisible: false,
@@ -587,50 +587,50 @@ let Util = {
               key: `[[${paramsInfo.childTypeName} item]]`,
               value: `[[${paramsInfo.childTypeName} item]]`,
               valueReadonly: true,
-              values: [],
+              valuex: [],
               valueType: paramsInfo.childValueType,
               keyVisible: false,
               parentValueType: 'array',
               readonly: false
             })
-            if (data[0] && Array.isArray(data[0].values)) {
-              data[0].values.forEach((kv) => {
-                let tItem = Object.assign({}, objItem, {values: []})
-                paramsInfo.values.forEach((obj) => {
-                  getItem(obj, tItem.values, kv.values)
+            if (data[0] && Array.isArray(data[0].valuex)) {
+              data[0].valuex.forEach((kv) => {
+                let tItem = Object.assign({}, objItem, {valuex: []})
+                paramsInfo.valuex.forEach((obj) => {
+                  getItem(obj, tItem.valuex, kv.valuex)
                   for (let i = 0; i < traversedLayers; i++) {
                     traversedDataTypes.pop()
                   }
                   traversedLayers = 0
                 })
-                item.values.push(tItem)
+                item.valuex.push(tItem)
               })
             }
-            if (!item.values.length) {
+            if (!item.valuex.length) {
               // no stored data, default put one item
-              paramsInfo.values.forEach((obj) => {
-                getItem(obj, objItem.values)
+              paramsInfo.valuex.forEach((obj) => {
+                getItem(obj, objItem.valuex)
               })
-              item.values.push(objItem)
+              item.valuex.push(objItem)
             }
           } else {
             let primitiveItem = Object.assign({}, itemTemplate, {
               key: `[[${paramsInfo.childTypeName} item]]`,
               value: '',
-              values: [],
+              valuex: [],
               valueType: paramsInfo.childValueType,
               keyVisible: false,
               parentValueType: 'array',
               readonly: false
             })
             if (data[0]) {
-              data[0].values.forEach((kv) => {
+              data[0].valuex.forEach((kv) => {
                 let tItem = Object.assign({}, primitiveItem, kv)
-                item.values.push(tItem)
+                item.valuex.push(tItem)
               })
             }
-            if (!item.values.length) {
-              item.values.push(primitiveItem)
+            if (!item.valuex.length) {
+              item.valuex.push(primitiveItem)
             }
           }
           result.push(item)
@@ -640,7 +640,7 @@ let Util = {
             key: `[[${paramsInfo.valueType}]]`,
             keyVisible: false,
             value: data[0] && data[0].value,
-            values: [],
+            valuex: [],
             valueType: paramsInfo.valueType
           })
           result.push(primitiveItem)
@@ -680,7 +680,7 @@ let Util = {
         let tempItem = Object.assign({}, itemTemplate, {
           key: output.name,
           title: output.description,
-          values: []
+          valuex: []
         })
         if (output.isArray) {
           tempItem.valueType = 'array'
@@ -701,7 +701,7 @@ let Util = {
           let tempItem = Object.assign({}, itemTemplate, {
             key: output.name,
             title: output.description,
-            values: [],
+            valuex: [],
             valueType: 'array',
             childValueType: childValueType
           })
@@ -724,7 +724,7 @@ let Util = {
           let tempItem = Object.assign({}, itemTemplate, {
             key: output.name,
             title: output.description,
-            values: [],
+            valuex: [],
             valueType: getEnumType(attributes[0].name)// all enums has same type, just judge the first element
           })
           resultContainer.push(tempItem)
@@ -733,7 +733,7 @@ let Util = {
           let tempItem = Object.assign({}, itemTemplate, {
             key: output.name,
             title: output.description,
-            values: [],
+            valuex: [],
             valueType: 'array',
             childValueType: childValueType
           })
@@ -743,7 +743,7 @@ let Util = {
             })
             let childItem = Object.assign({}, itemTemplate, {
               key: `[[${objItem.name} item]]`,
-              values: [],
+              valuex: [],
               valueType: childValueType,
               parentValueType: 'array'
             })
@@ -752,9 +752,9 @@ let Util = {
             })
             childAttributes = _.uniq(childAttributes, 'id')
             childAttributes.forEach((attr) => {
-              getItem(attr, childItem.values)
+              getItem(attr, childItem.valuex)
             })
-            tempItem.values.push(childItem)
+            tempItem.valuex.push(childItem)
           }
           resultContainer.push(tempItem)
         } else {
@@ -762,24 +762,24 @@ let Util = {
           let tempItem = Object.assign({}, itemTemplate, {
             key: output.name,
             title: output.description,
-            values: [],
+            valuex: [],
             valueType: output.isArray ? 'array' : 'object',
             childValueType: childValueType
           })
           if (output.isArray) {
             let childItem = Object.assign({}, itemTemplate, {
               key: `[[${dataType.name} item]]`,
-              values: [],
+              valuex: [],
               valueType: childValueType,
               parentValueType: 'array'
             })
-            tempItem.values.push(childItem)
+            tempItem.valuex.push(childItem)
             attributes.forEach((attr) => {
-              getItem(attr, childItem.values)
+              getItem(attr, childItem.valuex)
             })
           } else {
             attributes.forEach((attr) => {
-              getItem(attr, tempItem.values)
+              getItem(attr, tempItem.valuex)
             })
           }
           resultContainer.push(tempItem)
@@ -803,7 +803,7 @@ let Util = {
           let item = Object.assign({}, itemTemplate, {
             key: '[[array]]',
             title: outputs[0].description,
-            values: [],
+            valuex: [],
             valueType: 'array',
             childValueType: paramsInfo.childValueType
           })
@@ -811,20 +811,20 @@ let Util = {
             // array's element is object
             let objItem = Object.assign({}, itemTemplate, {
               key: `[[${paramsInfo.childTypeName} item]]`,
-              values: [],
+              valuex: [],
               valueType: paramsInfo.childValueType
             })
-            paramsInfo.values.forEach((obj) => {
-              getItem(obj, objItem.values)
+            paramsInfo.valuex.forEach((obj) => {
+              getItem(obj, objItem.valuex)
             })
-            item.values.push(objItem)
+            item.valuex.push(objItem)
           }
           result.push(item)
         } else {
           // json primitive
           let primitiveItem = Object.assign({}, itemTemplate, {
             key: `[[${paramsInfo.valueType}]]`,
-            values: [],
+            valuex: [],
             valueType: paramsInfo.valueType
           })
           result.push(primitiveItem)
@@ -875,7 +875,7 @@ let Util = {
             continue
           }
           if (rc.parentValueType === 'array') {
-            let tempResult = checkData(rc.values, data)
+            let tempResult = checkData(rc.valuex, data)
             if (tempResult) {
               return tempResult
             }
@@ -892,7 +892,7 @@ let Util = {
                   keyPaths.push(key)
                   for (let j = 0, m = data[key].length; j < m; j++) {
                     keyPaths.push({index: j})
-                    let tempResult = checkData(rc.values, data[key][j])
+                    let tempResult = checkData(rc.valuex, data[key][j])
                     if (tempResult) {
                       return tempResult
                     }
@@ -925,7 +925,7 @@ let Util = {
                 }
               } else if (resultKeyType === 'object') {
                 keyPaths.push(key)
-                let tempResult = checkData(rc.values, data[key])
+                let tempResult = checkData(rc.valuex, data[key])
                 if (tempResult) {
                   return tempResult
                 }
@@ -954,7 +954,7 @@ let Util = {
         let childValueType = resChecker[0].childValueType
         if (childValueType === 'object') {
           for (let i = 0, l = resData.length; i < l; i++) {
-            checkResult = checkJSONObj(resChecker[0].values, resData[i])
+            checkResult = checkJSONObj(resChecker[0].valuex, resData[i])
             if (checkResult) {
               checkResult.info = `Array's ${getOrderExp(i + 1)} element, ` + checkResult.info
               break
@@ -1064,7 +1064,7 @@ let Util = {
           key: key
         })
         let type = typeof value
-        item.values = []
+        item.valuex = []
         if (Array.isArray(value)) {
           item.valueType = 'array'
           let childValueType = getArrayChildValueType(value)
@@ -1079,11 +1079,11 @@ let Util = {
             }
             value.forEach((v) => {
               let tempItem = Object.assign({}, childItem, {
-                values: [],
+                valuex: [],
                 checked: true
               })
-              item.values.push(tempItem)
-              setData(v, tempItem.values)
+              item.valuex.push(tempItem)
+              setData(v, tempItem.valuex)
             })
           } else {
             if (childValueType) {
@@ -1093,11 +1093,11 @@ let Util = {
               }
               value.forEach((v) => {
                 let tempItem = Object.assign({}, childItem, {
-                  values: [],
+                  valuex: [],
                   checked: true,
                   value: v
                 })
-                item.values.push(tempItem)
+                item.valuex.push(tempItem)
               })
             } else {
               // if all of array elements are not the same type, change it to 'string' type
@@ -1111,7 +1111,7 @@ let Util = {
           if (!Object.keys(v).length) {
             v = {'': ''}
           }
-          setData(v, item.values)
+          setData(v, item.valuex)
         } else {
           item.valueType = type
           item.value = value
@@ -1178,7 +1178,7 @@ let Util = {
       valueType: 'object',
       childTypeName: null,
       childValueType: null,
-      values: [],
+      valuex: [],
       dataTypeFormat: null
     }
     let first = params[0]
@@ -1204,7 +1204,7 @@ let Util = {
               result.childValueType = typeMap[subDataType.id]
               if (!result.childValueType) {
                 result.childValueType = 'object'
-                result.values = _.filter(dataSource.attributes, (attr) => {
+                result.valuex = _.filter(dataSource.attributes, (attr) => {
                   return attr.parentId === subDataType.id
                 })
               }
