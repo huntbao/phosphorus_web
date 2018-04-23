@@ -208,7 +208,7 @@ class Collections extends React.Component {
             </div>
           }
           <div className="copyright">
-            <p>This tool is nothing to do with <a href="https://nei.netease.com" target="_blank">NEI</a></p>
+            <p>This tool is nothing to do with <a href="https://nei.netease.com" target="_blank">NEI</a>, all data is saved in local.</p>
             <p><span>Copyright ©1997-{Util.getCurrentYear()} Netease</span></p>
           </div>
         </div>
